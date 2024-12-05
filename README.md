@@ -15,7 +15,7 @@ LaboratorioVirtualFisica/
 │       ├── Services/
 │       ├── ViewModels/
 │       ├── Views/
-│       └── GerarGrafico.py
+│   └── GerarGrafico.py
 │
 ├── 2. Core/
 │   └── LaboratorioVirtualFisica/
