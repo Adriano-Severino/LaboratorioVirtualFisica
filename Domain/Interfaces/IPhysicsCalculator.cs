@@ -4,6 +4,6 @@ namespace Domain.Interfaces
 {
     public interface IPhysicsCalculator
     {
-        (double Position, double Velocity) CalculateMovement(double time, Particle particle);
+        (double Position, double Velocity) CalculateMovement(double time, Particle particle, bool considerFriction);
     }
 }

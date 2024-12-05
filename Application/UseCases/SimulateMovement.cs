@@ -12,9 +12,9 @@ namespace Application.UseCases
             _physicsCalculator = physicsCalculator;
         }
 
-        public void Execute(double time, Particle particle)
+        public void Execute(double time, Particle particle, bool considerFriction)
         {
-            var (position, velocity) = _physicsCalculator.CalculateMovement(time, particle);
+            var (position, velocity) = _physicsCalculator.CalculateMovement(time, particle, considerFriction);
             Console.WriteLine($"Time: {time}s - Position: {position:F2}m - Velocity: {velocity:F2}m/s");
         }
     }
