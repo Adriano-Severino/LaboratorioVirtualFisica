@@ -1,74 +1,101 @@
-# Simulador de Movimento
+# Simulador de Movimento de Partículas
 
-Este projeto é um **simulador de movimento** que calcula a posição e a velocidade de uma partícula ao longo do tempo, considerando ou não o atrito. Ele foi desenvolvido seguindo os princípios de **Domain-Driven Design (DDD)** e **Clean Code**, garantindo modularidade, organização e facilidade de manutenção.
-
+Este projeto é um simulador de movimento de partículas que calcula e visualiza a posição e velocidade de uma partícula ao longo do tempo, considerando diferentes condições de atrito. O projeto utiliza WPF para interface gráfica e Python para análise de dados, seguindo princípios de Clean Architecture.
 ---
 
 ## 📂 Estrutura de Pastas
 
 O projeto está organizado em quatro camadas principais, baseadas no DDD:
 ````
-├── Domain/
-│   ├── Entities/
-│   │   └── Particle.cs
-│   ├── Interfaces/
-│   │   └── IPhysicsCalculator.cs
-│   └── Services/
-│       └── PhysicsService.cs
-├── Application/
-│   └── UseCases/
-│       └── SimulateMovement.cs
-├── Infrastructure/
-│   └── Persistence/
-│       └── FileLogger.cs
-├── Presentation/
-│   └── Controllers/
-│       └── SimulationController.cs
-└── Program.cs
+LaboratorioVirtualFisica/
+├── 1. Presentation/
+│   └── ParticleMotion/
+│       ├── Helpers/
+│       ├── Models/
+│       ├── Services/
+│       ├── ViewModels/
+│       ├── Views/
+│       └── GerarGrafico.py
+│
+├── 2. Core/
+│   └── LaboratorioVirtualFisica/
+│       ├── Application/
+│       ├── Domain/
+│       ├── Infrastructure/
+│       └── Presentation/
+│
+└── 3. Test/
+    └── LaboratorioVirtualFisica.Test/
+        └── Domain/
+            └── Services/
+                └── PhysicsServiceTests.cs
 ````
+````
+1. Presentation (ParticleMotion)
+  . Interface gráfica WPF e visualização de dados
+  . Implementação do padrão MVVM
+  . Script Python para geração de gráficos
 
-### **1. Domain**
-A camada **Domain** contém as regras de negócio e as abstrações principais. Ela é independente das outras camadas.
+2. Core (LaboratorioVirtualFisica)
+ . Application: Casos de uso e lógica de aplicação
+ . Domain: Regras de negócio e entidades
+ . Infrastructure: Implementações técnicas
+ . Presentation: Componentes de apresentação compartilhados
 
-- **Entities/**:
-   - Contém as entidades principais do domínio, como `Particle`.
-- **Interfaces/**:
-   - Define contratos para serviços que podem ser implementados em outras camadas, como `IPhysicsCalculator`.
-- **Services/**:
-   - Implementa a lógica principal de cálculo, como o serviço `PhysicsService`.
+3. Test
+ . Testes unitários para validação da lógica de física
+ . Testes de serviços do domínio
 
-### **2. Application**
-A camada **Application** orquestra os casos de uso da aplicação. Ela coordena a interação entre o domínio e a infraestrutura.
-
-- **UseCases/**:
-   - Contém os casos de uso, como `SimulateMovement`, que executa a simulação com base nos dados fornecidos.
-
-### **3. Infrastructure**
-A camada **Infrastructure** contém detalhes técnicos, como persistência ou integração com sistemas externos.
-
-- **Persistence/**:
-   - Implementa serviços técnicos, como `FileLogger`, para registrar logs em arquivos.
-
-### **4. Presentation**
-A camada **Presentation** gerencia a interface com o usuário ou APIs. Neste caso, usamos um controlador simples para interagir via console.
-
-- **Controllers/**:
-   - Contém controladores como `SimulationController`, que gerencia as interações com o usuário.
-
----
-
+````
 ## 🛠️ Funcionalidades
+````
+O simulador oferece:
+ . Cálculo de posição e velocidade com e sem atrito
+ . Visualização gráfica dos resultados usando WPF
+ . Geração de gráficos comparativos usando Python
+ . Exportação de dados para análise
+````
+## 🚀 Tecnologias Utilizadas
 
-O simulador calcula:
-1. A posição da partícula ao longo do tempo.
-2. A velocidade instantânea da partícula em momentos específicos.
-3. A velocidade média total ao final do trajeto.
+ - WPF: Interface gráfica
+ - LiveCharts: Biblioteca para gráficos em WPF
+ - Python: Análise de dados e geração de gráficos
+ - matplotlib: Biblioteca Python para visualização de dados
 
-Além disso:
-- O cálculo pode considerar ou ignorar o atrito.
-- Os resultados são exibidos no console.
 
----
+## 📊 Visualização de Dados
+ - O projeto oferece duas formas de visualização:
+ - Gráficos interativos em tempo real usando WPF
+ - Análise detalhada usando scripts Python
+
+## 🔧 Configuração do Ambiente
+
+Pré-requisitos
+ - Visual Studio 2022 ou superior
+ - .NET 9.0
+ - Python 3.x
+ - Bibliotecas Python: matplotlib, pandas
+
+Instalação
+1. Clone o repositório
+2. Restaure os pacotes NuGet
+3. Instale as dependências Python:
+   ```bash
+   pip install matplotlib pandas
+
+## 📝 Uso do Sistema
+
+1. Execute o projeto ParticleMotion
+2. Insira os parâmetros da simulação:
+  - Força aplicada (N)
+  - Massa do objeto (kg)
+  - Condição de atrito
+3. Visualize os resultados nos gráficos
+
+## 📈 Análise de Dados
+Para gerar gráficos usando Python:
+ 1. Execute o script GerarGrafico.py
+ 2. Os gráficos serão gerados a partir dos dados do arquivo log.txt
 
 ## 🚀 Como Usar
 
