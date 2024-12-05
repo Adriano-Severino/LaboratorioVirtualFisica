@@ -30,24 +30,30 @@ O projeto está organizado em quatro camadas principais, baseadas no DDD:
 ### **1. Domain**
 A camada **Domain** contém as regras de negócio e as abstrações principais. Ela é independente das outras camadas.
 
-- **Entities/**: Contém as entidades principais do domínio, como `Particle`.
-- **Interfaces/**: Define contratos para serviços que podem ser implementados em outras camadas, como `IPhysicsCalculator`.
-- **Services/**: Implementa a lógica principal de cálculo, como o serviço `PhysicsService`.
+- **Entities/**:
+   - Contém as entidades principais do domínio, como `Particle`.
+- **Interfaces/**:
+   - Define contratos para serviços que podem ser implementados em outras camadas, como `IPhysicsCalculator`.
+- **Services/**:
+   - Implementa a lógica principal de cálculo, como o serviço `PhysicsService`.
 
 ### **2. Application**
 A camada **Application** orquestra os casos de uso da aplicação. Ela coordena a interação entre o domínio e a infraestrutura.
 
-- **UseCases/**: Contém os casos de uso, como `SimulateMovement`, que executa a simulação com base nos dados fornecidos.
+- **UseCases/**:
+   - Contém os casos de uso, como `SimulateMovement`, que executa a simulação com base nos dados fornecidos.
 
 ### **3. Infrastructure**
 A camada **Infrastructure** contém detalhes técnicos, como persistência ou integração com sistemas externos.
 
-- **Persistence/**: Implementa serviços técnicos, como `FileLogger`, para registrar logs em arquivos.
+- **Persistence/**:
+   - Implementa serviços técnicos, como `FileLogger`, para registrar logs em arquivos.
 
 ### **4. Presentation**
 A camada **Presentation** gerencia a interface com o usuário ou APIs. Neste caso, usamos um controlador simples para interagir via console.
 
-- **Controllers/**: Contém controladores como `SimulationController`, que gerencia as interações com o usuário.
+- **Controllers/**:
+   - Contém controladores como `SimulationController`, que gerencia as interações com o usuário.
 
 ---
 
@@ -81,18 +87,22 @@ Além disso:
    dotnet run
    
 3. Insira os valores solicitados no console:
+ ````
    Força aplicada (em Newtons).
    Massa da partícula (em kg).
-   
+````
 4. Veja os resultados no console:
+````
    . Posição e velocidade instantânea da partícula em tempos específicos (1s, 5s, 10s, 15s, 20s).
    . Velocidade média total ao final do trajeto.
-
-5 Entrada:
+````
+5. Entrada:
+````
   Digite a força aplicada (em Newtons): 10
   Digite a massa da partícula (em kg): 2
-
-6 Saída:
+````
+6. Saída:
+````
   Com atrito
   Força aplicada de: 10 Newtons
   Massa da particula de: 2 Kgs
@@ -105,10 +115,11 @@ Além disso:
   Tempo: 20s - Posição: 714m - Velocidade Instantânea: 90.11m/s
 
   Velocidade Média Total: 35.70 m/s
-
+````
 🔧 Detalhes Técnicos
 
 Fórmulas Utilizadas
+````
   1. Sem Atrito:
      . Aceleração ((a)): (a = \frac{F}{m})
      . Posição ((x)): (x = x_0 + v_0t + \frac{1}{2}at^2)
@@ -117,8 +128,9 @@ Fórmulas Utilizadas
   2. Com Atrito:
     . Força de atrito ((F_a)): (F_a = \mu \cdot m \cdot g)
     . Aceleração total ((a_t)): (a_t = \frac{F - F_a}{m})
-
+````
 Princípios Seguidos
+````
   1. Domain-Driven Design (DDD):
     . Separação clara entre domínio, aplicação, infraestrutura e apresentação.
 
@@ -131,6 +143,7 @@ Princípios Seguidos
     .Open/Closed: O sistema está aberto para extensão e fechado para modificação.
     .Dependency Inversion: Uso de interfaces para desacoplar dependências.
 
+````
 📜 Licença
 Este projeto está licenciado sob a MIT License.
 
