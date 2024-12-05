@@ -89,6 +89,6 @@ def plot_graphs(df):
     plt.show()
 
 # Caminho do arquivo
-file_path = os.path.join('/log.txt')
+file_path = os.path.join('/log do registros laboratorio virtual de fisica.txt')
 df = read_log_file(file_path)
 plot_graphs(df)
