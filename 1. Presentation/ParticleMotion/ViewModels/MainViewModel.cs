@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.IO;
 using LiveCharts;
 using LiveCharts.Wpf;
 using ParticleMotion.Helpers;
@@ -43,13 +44,25 @@ namespace ParticleMotion.ViewModels
         /// </summary>
         private void LoadData()
         {
-            var logEntries = _logReaderService.ReadLogEntries("log.txt");
-            SeriesCollection = ChartHelper.CreateSeriesCollection(logEntries);
-            XAxis = ChartHelper.CreateXAxis();
-            YAxis = ChartHelper.CreateYAxis();
-            OnPropertyChanged(nameof(SeriesCollection));
-            OnPropertyChanged(nameof(XAxis));
-            OnPropertyChanged(nameof(YAxis));
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string logFilePath = Path.Combine(desktopPath, "log do registros laboratorio virtual de fisica.txt");
+
+            if (File.Exists(logFilePath))
+            {
+                var logEntries = _logReaderService.ReadLogEntries(logFilePath);
+                SeriesCollection = ChartHelper.CreateSeriesCollection(logEntries);
+                XAxis = ChartHelper.CreateXAxis();
+                YAxis = ChartHelper.CreateYAxis();
+                OnPropertyChanged(nameof(SeriesCollection));
+                OnPropertyChanged(nameof(XAxis));
+                OnPropertyChanged(nameof(YAxis));
+            }
+            else
+            {
+                // Lidar com o caso em que o arquivo de log não é encontrado
+                Console.WriteLine($"Arquivo de log não encontrado em: {logFilePath}");
+                // Você pode adicionar aqui uma lógica para notificar o usuário na interface gráfica
+            }
         }
 
         /// <summary>

@@ -12,9 +12,10 @@
         /// Inicializa uma nova instância da classe FileLogger.
         /// </summary>
         /// <param name="filePath">Caminho do arquivo onde os logs serão salvos. O valor padrão é "log.txt".</param>
-        public FileLogger(string filePath = "log.txt")
+        public FileLogger(string fileName = "log do registros laboratorio virtual de fisica.txt")
         {
-            _filePath = filePath;
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            _filePath = Path.Combine(desktopPath, fileName);
             _logEntries = new List<string[]>();
         }
 
