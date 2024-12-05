@@ -1,7 +1,6 @@
 ﻿using Application.UseCases;
 using Infrastructure.Persistence;
 using LaboratorioVirtualFisica.Domain.Entities;
-using System.Collections.Generic;
 
 namespace Presentation.Controllers
 {

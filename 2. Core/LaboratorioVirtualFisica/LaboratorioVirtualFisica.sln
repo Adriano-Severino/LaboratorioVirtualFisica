@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaboratorioVirtualFisica", "LaboratorioVirtualFisica.csproj", "{9ED8F59C-3E89-45A9-ADFF-3E7B12317D2F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Presentation", "1. Presentation", "{01BEEE92-888D-47AA-89CB-EB6D44CABADE}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\1. Presentation\GerarGrafico.py = ..\..\1. Presentation\GerarGrafico.py
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Core", "2. Core", "{B25C1FCE-533F-4D0A-AECF-363849C893BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Test", "3. Test", "{172E1A9C-339E-4034-BE34-56E51A5F9CCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaboratorioVirtualFisica.Test", "..\..\3. Test\LaboratorioVirtualFisica.Test\LaboratorioVirtualFisica.Test.csproj", "{CD99F009-B2CB-4A8E-A82A-F64E3A9F7799}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParticleMotion", "..\..\1. Presentation\ParticleMotion\ParticleMotion.csproj", "{7E4A9183-807E-4F87-8A20-BA4D28E25A86}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9ED8F59C-3E89-45A9-ADFF-3E7B12317D2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ED8F59C-3E89-45A9-ADFF-3E7B12317D2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ED8F59C-3E89-45A9-ADFF-3E7B12317D2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ED8F59C-3E89-45A9-ADFF-3E7B12317D2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD99F009-B2CB-4A8E-A82A-F64E3A9F7799}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD99F009-B2CB-4A8E-A82A-F64E3A9F7799}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD99F009-B2CB-4A8E-A82A-F64E3A9F7799}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD99F009-B2CB-4A8E-A82A-F64E3A9F7799}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E4A9183-807E-4F87-8A20-BA4D28E25A86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E4A9183-807E-4F87-8A20-BA4D28E25A86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E4A9183-807E-4F87-8A20-BA4D28E25A86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E4A9183-807E-4F87-8A20-BA4D28E25A86}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9ED8F59C-3E89-45A9-ADFF-3E7B12317D2F} = {B25C1FCE-533F-4D0A-AECF-363849C893BB}
+		{CD99F009-B2CB-4A8E-A82A-F64E3A9F7799} = {172E1A9C-339E-4034-BE34-56E51A5F9CCD}
+		{7E4A9183-807E-4F87-8A20-BA4D28E25A86} = {01BEEE92-888D-47AA-89CB-EB6D44CABADE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {952E0F91-6280-45C1-BC4F-377BAA4C9454}
+	EndGlobalSection
+EndGlobal
