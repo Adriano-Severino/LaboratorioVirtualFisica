@@ -4,8 +4,16 @@ using System.IO;
 
 namespace ParticleMotion.Services
 {
+    /// <summary>
+    /// Implementa o serviço de leitura de logs de acordo com a interface ILogReaderService.
+    /// </summary>
     public class LogReaderService : ILogReaderService
     {
+        /// <summary>
+        /// Lê as entradas de log de um arquivo especificado.
+        /// </summary>
+        /// <param name="filePath">O caminho do arquivo de log a ser lido.</param>
+        /// <returns>Uma lista de entradas de log (LogEntry) lidas do arquivo.</returns>
         public List<LogEntry> ReadLogEntries(string filePath)
         {
             var logEntries = new List<LogEntry>();

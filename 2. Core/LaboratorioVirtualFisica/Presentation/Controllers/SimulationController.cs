@@ -4,17 +4,28 @@ using LaboratorioVirtualFisica.Domain.Entities;
 
 namespace Presentation.Controllers
 {
+    /// <summary>
+    /// Controlador responsável por gerenciar a execução da simulação de movimento.
+    /// </summary>
     public class SimulationController
     {
         private readonly SimulateMovement _simulateMovement;
         private readonly FileLogger _logger;
 
+        /// <summary>
+        /// Inicializa uma nova instância da classe SimulationController.
+        /// </summary>
+        /// <param name="simulateMovement">Caso de uso responsável pela simulação do movimento.</param>
+        /// <param name="logger">Logger para registrar os detalhes e resultados da simulação.</param>
         public SimulationController(SimulateMovement simulateMovement, FileLogger logger)
         {
             _simulateMovement = simulateMovement;
             _logger = logger;
         }
 
+        /// <summary>
+        /// Executa o fluxo principal da simulação, incluindo entrada de dados, execução da simulação e registro dos resultados.
+        /// </summary>
         public void Run()
         {
             Console.Write("Digite a força aplicada (em Newtons): ");
@@ -28,7 +39,7 @@ namespace Presentation.Controllers
 
             var particle = new Particle(mass, force);
 
-            // Log simulation details
+            // Registra os detalhes iniciais da simulação
             _logger.LogDetails(considerFriction, force, mass);
 
             // Lista para armazenar medições de tempo e posição
@@ -52,6 +63,11 @@ namespace Presentation.Controllers
             _logger.SaveLog();
         }
 
+        /// <summary>
+        /// Calcula a velocidade média com base nas medições de tempo e posição.
+        /// </summary>
+        /// <param name="measurements">Lista de medições contendo tempo e posição.</param>
+        /// <returns>A velocidade média calculada em metros por segundo.</returns>
         private double CalculateAverageVelocity(List<(double Time, double Position)> measurements)
         {
             if (measurements.Count < 2) return 0;

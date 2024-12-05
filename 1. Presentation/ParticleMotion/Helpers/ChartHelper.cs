@@ -5,8 +5,16 @@ using System.Windows.Media;
 
 namespace ParticleMotion.Helpers
 {
+    /// <summary>
+    /// Fornece métodos auxiliares para criar e configurar gráficos usando a biblioteca LiveCharts.
+    /// </summary>
     public static class ChartHelper
     {
+        /// <summary>
+        /// Cria uma coleção de séries para o gráfico com base em uma lista de entradas de log.
+        /// </summary>
+        /// <param name="logEntries">A lista de entradas de log contendo os dados para o gráfico.</param>
+        /// <returns>Uma coleção de séries para o gráfico.</returns>
         public static SeriesCollection CreateSeriesCollection(List<LogEntry> logEntries)
         {
             var series = new SeriesCollection();
@@ -43,6 +51,10 @@ namespace ParticleMotion.Helpers
             return series;
         }
 
+        /// <summary>
+        /// Cria e configura o eixo X do gráfico.
+        /// </summary>
+        /// <returns>Um objeto Axis configurado para o eixo X.</returns>
         public static Axis CreateXAxis()
         {
             return new Axis
@@ -52,6 +64,10 @@ namespace ParticleMotion.Helpers
             };
         }
 
+        /// <summary>
+        /// Cria e configura o eixo Y do gráfico.
+        /// </summary>
+        /// <returns>Um objeto Axis configurado para o eixo Y.</returns>
         public static Axis CreateYAxis()
         {
             return new Axis
