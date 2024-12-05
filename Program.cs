@@ -16,16 +16,14 @@ class Program
 
         if (considerarAtrito)
         {
-            Console.WriteLine($"Com atrito");
-
+            Console.WriteLine("Com atrito");
         }
         else
         {
-            Console.WriteLine($"Sem atrito");
-
+            Console.WriteLine("Sem atrito");
         }
-        Console.WriteLine($"Força aplicada de: {forca} Newtons)");
-        Console.WriteLine($"Massa da particula de: {forca} Kgs)");
+        Console.WriteLine($"Força aplicada de: {forca} Newtons");
+        Console.WriteLine($"Massa da particula de: {massa} Kgs");
         Console.WriteLine("============================================================");
         Console.WriteLine("Tempo (s)\tPosição (m)\tVelocidade Instantânea (m/s)");
 
@@ -33,20 +31,19 @@ class Program
         double velocidadeInicial = 0;
 
         // Mostrar os valores em tempos específicos
-        MostrarValores(1, aceleracao, constanteAtrito, considerarAtrito, massa, posicaoInicial, velocidadeInicial);
-        MostrarValores(5, aceleracao, constanteAtrito, considerarAtrito, massa, posicaoInicial, velocidadeInicial);
-        MostrarValores(10, aceleracao, constanteAtrito, considerarAtrito, massa, posicaoInicial, velocidadeInicial);
-        MostrarValores(15, aceleracao, constanteAtrito, considerarAtrito, massa, posicaoInicial, velocidadeInicial);
-        MostrarValores(20, aceleracao, constanteAtrito, considerarAtrito, massa, posicaoInicial, velocidadeInicial);
+        double posicaoFinal = MostrarValores(1, aceleracao, constanteAtrito, considerarAtrito, massa, posicaoInicial, velocidadeInicial);
+        posicaoFinal = MostrarValores(5, aceleracao, constanteAtrito, considerarAtrito, massa, posicaoInicial, velocidadeInicial);
+        posicaoFinal = MostrarValores(10, aceleracao, constanteAtrito, considerarAtrito, massa, posicaoInicial, velocidadeInicial);
+        posicaoFinal = MostrarValores(15, aceleracao, constanteAtrito, considerarAtrito, massa, posicaoInicial, velocidadeInicial);
+        posicaoFinal = MostrarValores(20, aceleracao, constanteAtrito, considerarAtrito, massa, posicaoInicial, velocidadeInicial);
 
-        // Calcular a velocidade média total até 500m
-        double tempoAte500m = CalcularTempoAte500m(aceleracao, constanteAtrito, considerarAtrito, massa);
-        double velocidadeMediaTotal = 500 / tempoAte500m;
+        // Calcular a velocidade média total
+        double velocidadeMediaTotal = posicaoFinal / 20;
 
-        Console.WriteLine($"\nVelocidade Média Total até 500m: {velocidadeMediaTotal:F2} m/s");
+        Console.WriteLine($"\nVelocidade Média Total: {velocidadeMediaTotal:F2} m/s");
     }
 
-    static void MostrarValores(double tempo, double aceleracao, double constanteAtrito, bool considerarAtrito, double massa, double posicaoInicial, double velocidadeInicial)
+    static double MostrarValores(double tempo, double aceleracao, double constanteAtrito, bool considerarAtrito, double massa, double posicaoInicial, double velocidadeInicial)
     {
         double posicao, velocidade;
 
@@ -61,6 +58,7 @@ class Program
         }
 
         Console.WriteLine($"Tempo: {tempo}s - Posição: {(int)posicao}m - Velocidade Instantânea: {velocidade:F2}m/s");
+        return posicao;
     }
 
     static (double posicao, double velocidade) CalcularMovimentoComAtrito(double tempo, double aceleracao, double constanteAtrito, double massa, double posicaoInicial, double velocidadeInicial)
@@ -78,32 +76,5 @@ class Program
         }
 
         return (posicao, velocidade);
-    }
-
-    static double CalcularTempoAte500m(double aceleracao, double constanteAtrito, bool considerarAtrito, double massa)
-    {
-        double tempo = 0;
-        double posicao = 0;
-        double velocidade = 0;
-        double intervaloTempo = 0.01;
-
-        while (posicao < 500)
-        {
-            if (considerarAtrito)
-            {
-                double forcaAtrito = constanteAtrito * massa * 9.8 * Math.Sign(velocidade);
-                double aceleracaoTotal = (massa * aceleracao - forcaAtrito) / massa;
-                velocidade += aceleracaoTotal * intervaloTempo;
-            }
-            else
-            {
-                velocidade += aceleracao * intervaloTempo;
-            }
-
-            posicao += velocidade * intervaloTempo;
-            tempo += intervaloTempo;
-        }
-
-        return tempo;
     }
 }
