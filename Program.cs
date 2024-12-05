@@ -6,7 +6,7 @@ class Program
     {
         Console.Write("Digite a força aplicada (em Newtons): ");
         double forca = Convert.ToDouble(Console.ReadLine());
-        
+
         Console.Write("Digite a massa da partícula (em kg): ");
         double massa = Convert.ToDouble(Console.ReadLine());
 
@@ -14,109 +14,96 @@ class Program
         bool considerarAtrito = true; // modificar para true ou false conforme necessário
         double aceleracao = forca / massa; // aceleracao = F / m
 
-        Console.WriteLine("Tempo (s)\tPosição (m)\tVelocidade Instantânea (m/s)\tVelocidade Média Total (m/s)");
+        if (considerarAtrito)
+        {
+            Console.WriteLine($"Com atrito");
 
-        // Calcular a velocidade média do intervalo de 1 metro até 500 metros
-        double tempoInicial = 0;
-        double posicaoInicial = 1;
-        double posicaoFinal = 500;
+        }
+        else
+        {
+            Console.WriteLine($"Sem atrito");
+
+        }
+        Console.WriteLine($"Força aplicada de: {forca} Newtons)");
+        Console.WriteLine($"Massa da particula de: {forca} Kgs)");
+        Console.WriteLine("============================================================");
+        Console.WriteLine("Tempo (s)\tPosição (m)\tVelocidade Instantânea (m/s)");
+
+        double posicaoInicial = 0;
         double velocidadeInicial = 0;
 
-        // Encontrar o tempo que a partícula leva para atingir 500 metros (sem atrito)
-        double tempoFinal = Math.Sqrt((2 * (posicaoFinal - posicaoInicial)) / aceleracao);
-        if (considerarAtrito)
-        {
-            // Ajustar o cálculo do tempo considerando o atrito
-            tempoFinal = CalcularTempoComAtrito(posicaoInicial, posicaoFinal, aceleracao, constanteAtrito, massa);
-        }
-        
-        double velocidadeFinal = aceleracao * tempoFinal;
+        // Mostrar os valores em tempos específicos
+        MostrarValores(1, aceleracao, constanteAtrito, considerarAtrito, massa, posicaoInicial, velocidadeInicial);
+        MostrarValores(5, aceleracao, constanteAtrito, considerarAtrito, massa, posicaoInicial, velocidadeInicial);
+        MostrarValores(10, aceleracao, constanteAtrito, considerarAtrito, massa, posicaoInicial, velocidadeInicial);
+        MostrarValores(15, aceleracao, constanteAtrito, considerarAtrito, massa, posicaoInicial, velocidadeInicial);
+        MostrarValores(20, aceleracao, constanteAtrito, considerarAtrito, massa, posicaoInicial, velocidadeInicial);
 
-        // Calcular a velocidade média total
-        double velocidadeMediaTotal = (posicaoFinal - posicaoInicial) / tempoFinal;
+        // Calcular a velocidade média total até 500m
+        double tempoAte500m = CalcularTempoAte500m(aceleracao, constanteAtrito, considerarAtrito, massa);
+        double velocidadeMediaTotal = 500 / tempoAte500m;
 
-        // Mostrar os valores em tempos específicos e a velocidade média total
-        MostrarValores(1, aceleracao, constanteAtrito, considerarAtrito, massa);
-        MostrarValores(5, aceleracao, constanteAtrito, considerarAtrito, massa);
-        MostrarValores(10, aceleracao, constanteAtrito, considerarAtrito, massa);
-        MostrarValores(15, aceleracao, constanteAtrito, considerarAtrito, massa);
-        MostrarValores(20, aceleracao, constanteAtrito, considerarAtrito, massa);
-
-        Console.WriteLine($"\nVelocidade Média Total de 1m a 500m: {velocidadeMediaTotal:F2} m/s");
+        Console.WriteLine($"\nVelocidade Média Total até 500m: {velocidadeMediaTotal:F2} m/s");
     }
 
-    static void MostrarValores(double tempo, double aceleracao, double constanteAtrito, bool considerarAtrito, double massa)
+    static void MostrarValores(double tempo, double aceleracao, double constanteAtrito, bool considerarAtrito, double massa, double posicaoInicial, double velocidadeInicial)
     {
-        double posicao = 1 + 0.5 * aceleracao * Math.Pow(tempo, 2);
-        double velocidade = aceleracao * tempo;
+        double posicao, velocidade;
 
         if (considerarAtrito)
         {
-            // Ajustar os cálculos considerando o atrito
-            posicao = CalcularPosicaoComAtrito(tempo, aceleracao, constanteAtrito, massa);
-            velocidade = CalcularVelocidadeComAtrito(tempo, aceleracao, constanteAtrito, massa);
+            (posicao, velocidade) = CalcularMovimentoComAtrito(tempo, aceleracao, constanteAtrito, massa, posicaoInicial, velocidadeInicial);
         }
-
-        // Limitar a posição a um máximo de 500 metros
-        if (posicao > 500)
+        else
         {
-            posicao = 500;
+            posicao = posicaoInicial + velocidadeInicial * tempo + 0.5 * aceleracao * Math.Pow(tempo, 2);
+            velocidade = velocidadeInicial + aceleracao * tempo;
         }
 
-        Console.WriteLine($"Tempo: {tempo}s - Posição: {Math.Round(posicao)}m - Velocidade Instantânea: {velocidade:F2}m/s");
+        Console.WriteLine($"Tempo: {tempo}s - Posição: {(int)posicao}m - Velocidade Instantânea: {velocidade:F2}m/s");
     }
 
-    static double CalcularTempoComAtrito(double posicaoInicial, double posicaoFinal, double aceleracao, double constanteAtrito, double massa)
+    static (double posicao, double velocidade) CalcularMovimentoComAtrito(double tempo, double aceleracao, double constanteAtrito, double massa, double posicaoInicial, double velocidadeInicial)
     {
-        // Simulação aproximada para encontrar o tempo considerando o atrito
-        double tempo = 0;
-        double intervaloTempo = 0.01; // Pequeno intervalo de tempo para simulação
+        double intervaloTempo = 0.01;
         double posicao = posicaoInicial;
-        double velocidade = 0;
-        
-        while (posicao < posicaoFinal)
+        double velocidade = velocidadeInicial;
+
+        for (double t = 0; t < tempo; t += intervaloTempo)
         {
-            double forcaAtrito = -constanteAtrito * velocidade;
-            double aceleracaoTotal = aceleracao + forcaAtrito / massa;
+            double forcaAtrito = constanteAtrito * massa * 9.8 * Math.Sign(velocidade);
+            double aceleracaoTotal = (massa * aceleracao - forcaAtrito) / massa;
             velocidade += aceleracaoTotal * intervaloTempo;
+            posicao += velocidade * intervaloTempo;
+        }
+
+        return (posicao, velocidade);
+    }
+
+    static double CalcularTempoAte500m(double aceleracao, double constanteAtrito, bool considerarAtrito, double massa)
+    {
+        double tempo = 0;
+        double posicao = 0;
+        double velocidade = 0;
+        double intervaloTempo = 0.01;
+
+        while (posicao < 500)
+        {
+            if (considerarAtrito)
+            {
+                double forcaAtrito = constanteAtrito * massa * 9.8 * Math.Sign(velocidade);
+                double aceleracaoTotal = (massa * aceleracao - forcaAtrito) / massa;
+                velocidade += aceleracaoTotal * intervaloTempo;
+            }
+            else
+            {
+                velocidade += aceleracao * intervaloTempo;
+            }
+
             posicao += velocidade * intervaloTempo;
             tempo += intervaloTempo;
         }
 
         return tempo;
-    }
-
-    static double CalcularPosicaoComAtrito(double tempo, double aceleracao, double constanteAtrito, double massa)
-    {
-        // Simulação aproximada para encontrar a posição considerando o atrito
-        double intervaloTempo = 0.01; // Pequeno intervalo de tempo para simulação
-        double posicao = 1;
-        double velocidade = 0;
-
-        for (double t = 0; t < tempo; t += intervaloTempo)
-        {
-            double forcaAtrito = -constanteAtrito * velocidade;
-            double aceleracaoTotal = aceleracao + forcaAtrito / massa;
-            velocidade += aceleracaoTotal * intervaloTempo;
-            posicao += velocidade * intervaloTempo;
-        }
-
-        return posicao;
-    }
-
-    static double CalcularVelocidadeComAtrito(double tempo, double aceleracao, double constanteAtrito, double massa)
-    {
-        // Simulação aproximada para encontrar a velocidade considerando o atrito
-        double intervaloTempo = 0.01; // Pequeno intervalo de tempo para simulação
-        double velocidade = 0;
-
-        for (double t = 0; t < tempo; t += intervaloTempo)
-        {
-            double forcaAtrito = -constanteAtrito * velocidade;
-            double aceleracaoTotal = aceleracao + forcaAtrito / massa;
-            velocidade += aceleracaoTotal * intervaloTempo;
-        }
-
-        return velocidade;
     }
 }
