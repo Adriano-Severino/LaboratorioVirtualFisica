@@ -10,7 +10,7 @@ class Program
         var physicsService = new PhysicsService();
         var logger = new FileLogger();
         var simulateMovement = new SimulateMovement(physicsService, logger);
-        var controller = new SimulationController(simulateMovement);
+        var controller = new SimulationController(simulateMovement, logger);
 
         controller.Run();
     }

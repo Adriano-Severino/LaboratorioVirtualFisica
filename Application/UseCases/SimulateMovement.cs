@@ -15,18 +15,16 @@ namespace Application.UseCases
             _logger = logger;
         }
 
-        public void Execute(double time, Particle particle, bool considerFriction)
+        public double ExecuteAndLog(double time, Particle particle, bool considerFriction)
         {
-            // Log the friction condition, force, and mass
-            _logger.LogDetails(considerFriction, particle.Force, particle.Mass);
-
-            // Perform calculations
             var (position, velocity) = _physicsCalculator.CalculateMovement(time, particle, considerFriction);
 
-            // Log the result
-            string message = $"Tempo: {time}s - Posição: {position:F2}m - Velocidade: {velocity:F2}m/s";
-            _logger.Log(message);
-            Console.WriteLine(message);
+            // Log calculation details
+            _logger.LogCalculation(time, position, velocity);
+
+            Console.WriteLine($"Tempo: {time}s - Posição: {position:F2}m - Velocidade: {velocity:F2}m/s");
+
+            return position;
         }
     }
 }
